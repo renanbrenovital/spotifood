@@ -1,11 +1,16 @@
 import React from 'react';
-import logo from '../../../assets/logo.svg';
 import { Organism } from './styles';
+
+import Logo from '../../molecules/Logo';
+import Customer from '../../molecules/Customer';
+import Logout from '../../molecules/Logout';
 
 function Aside() {
   return (
     <Organism className="aside">
-      <img src={logo} alt="logo" width="125px" />
+      <Logo />
+      <Customer />
+      <Logout />
     </Organism>
   );
 }
