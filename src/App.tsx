@@ -1,11 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
+import Home from './components/pages/Home';
 
 function App() {
   return (
-    <div className="App">
-      <img src={logo} alt="logo" />
-    </div>
+    <Home />
   );
 }
 
