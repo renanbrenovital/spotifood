@@ -1,11 +1,18 @@
 import React from 'react';
-import logo from '../../assets/logo.svg';
+
+import Aside from '../organisms/Aside';
+import Header from '../organisms/Header';
+import Main from '../organisms/Main';
+
+import { Page } from './styles';
 
 function Home() {
   return (
-    <div className="App">
-      <img src={logo} alt="logo" />
-    </div>
+    <Page>
+      <Aside />
+      <Header />
+      <Main />
+    </Page>
   );
 }
 

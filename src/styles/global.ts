@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
-export default createGlobalStyle`  
+export default createGlobalStyle`
+  :root {
+    --color-background: #171E31;
+    --color-background-dark: #12192C;
+  }  
   *,
   *::after,
   *::before {
