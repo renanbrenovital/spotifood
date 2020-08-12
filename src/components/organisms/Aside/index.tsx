@@ -7,7 +7,7 @@ import Logout from '../../molecules/Logout';
 
 function Aside() {
   return (
-    <Organism className="aside">
+    <Organism>
       <Logo />
       <Customer />
       <Logout />

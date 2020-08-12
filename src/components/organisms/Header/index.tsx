@@ -3,7 +3,7 @@ import { Organism } from './styles';
 
 function Header() {
   return (
-    <Organism className="header">
+    <Organism>
       <p>Header</p>
     </Organism>
   );

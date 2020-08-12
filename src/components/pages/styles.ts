@@ -11,15 +11,15 @@ export const Page = styled.div`
     "ASIDE HEAD"
     "ASIDE MAIN";
 
-  .aside {
+  aside {
     grid-area: ASIDE;
   }
 
-  .header {
+  header {
     grid-area: HEAD;
   }
 
-  .main {
+  main {
     grid-area: MAIN;
   }
 `;

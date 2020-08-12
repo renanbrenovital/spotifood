@@ -3,7 +3,7 @@ import { Organism } from './styles';
 
 function Main() {
   return (
-    <Organism className="main">
+    <Organism>
       <p>Main</p>
     </Organism>
   );
