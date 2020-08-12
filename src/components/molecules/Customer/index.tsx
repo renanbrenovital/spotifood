@@ -7,7 +7,7 @@ import Heading from '../../atoms/Heading';
 function Customer() {
   return (
     <Molecule>
-      <Span>iFoodCustomer</Span>
+      <Span>#iFoodMusicLover</Span>
       <Heading>Renan Vital</Heading>
     </Molecule>
   );
