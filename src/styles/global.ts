@@ -5,7 +5,10 @@ export default createGlobalStyle`
     --color-primary: #E4492E;
     --color-background: #171E31;
     --color-background-dark: #12192C;
-    --color-shadow: #000000;
+    --color-dark: #000000;
+    --color-dark-30: #00000030;
+    --color-light: #E5E5E5;
+    --color-light-50: #E5E5E550;
   }  
   *,
   *::after,

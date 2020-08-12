@@ -1,10 +1,14 @@
 import React from 'react';
 import { Organism } from './styles';
 
+import Filters from '../../molecules/Filters';
+import Search from '../../molecules/Search';
+
 function Header() {
   return (
     <Organism>
-      <p>Header</p>
+      <Filters />
+      <Search />
     </Organism>
   );
 }

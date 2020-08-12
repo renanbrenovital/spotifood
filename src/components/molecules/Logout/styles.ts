@@ -5,7 +5,7 @@ export const Molecule = styled.div`
 
   button {
     background: var(--color-background);
-    border: 2px solid var(--color-dark);
+    border: 2px solid var(--color-dark-30);
     border-radius: 5px;
     color: var(--color-primary);
     width: 100%;
@@ -16,6 +16,6 @@ export const Molecule = styled.div`
     text-transform: uppercase;
     outline: 0;
     cursor: pointer;
-    box-shadow: 1px 1px 0 var(--color-shadow);
+    box-shadow: 1px 1px 0 var(--color-dark);
   }
 `;
