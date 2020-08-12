@@ -5,14 +5,14 @@ export const Molecule = styled.div`
 
   button {
     background: var(--color-background);
-    border: 1px solid var(--color-primary);
+    border: 2px solid var(--color-dark);
     border-radius: 5px;
     color: var(--color-primary);
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     text-transform: uppercase;
     outline: 0;
     cursor: pointer;
