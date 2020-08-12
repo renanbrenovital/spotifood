@@ -1,14 +1,15 @@
 import React from 'react';
 import { Molecule } from './styles';
+import { logout } from '../../../services/auth';
 
-import Button from '../../atoms/Button';
 import Img from '../../atoms/Img';
 import iconPower from '../../../assets/IconPower.svg';
+import Button from '../../atoms/Button';
 
 function Logout() {
   return (
     <Molecule>
-      <Button>
+      <Button onClick={() => logout()}>
         Sair <Img src={iconPower} alt="Logout" />
       </Button>
     </Molecule>

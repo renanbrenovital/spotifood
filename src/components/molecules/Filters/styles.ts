@@ -7,15 +7,15 @@ export const Molecule = styled.aside`
   justify-content: space-between;
   width: 100%;
   
-  select, input {
+  select, input[type='date'] {
     width: 160px;
-    height: 40px;
     background: var(--color-dark-30);
-    border-radius: 25px;
+    border-radius: 5px;
     outline: 0;
-    color: var(--color-light-50);
+    color: var(--color-light);
     border: none;
     padding: 0.5rem 1rem;
     font-size: 1rem;
+    cursor: pointer;
   }
 `;
