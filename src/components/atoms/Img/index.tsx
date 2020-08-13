@@ -1,13 +1,13 @@
 import React from 'react';
-
 interface Props {
   src: string;
   alt: string;
 }
 
 function Img(props: Props) {
+  const { src, alt } = props;
   return (
-    <img src={props.src} alt={props.alt} />
+    <img src={src} alt={alt} />
   );
 }
 
