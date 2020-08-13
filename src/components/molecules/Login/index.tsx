@@ -12,7 +12,7 @@ function Login(props: Props) {
   return (
     <Molecule>
       <Logo />
-      <Link href={href}>LOGIN SPOTIFOOD</Link>
+      <Link href={href}>ENTRAR</Link>
     </Molecule>
   );
 }

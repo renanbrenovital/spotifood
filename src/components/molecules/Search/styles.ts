@@ -9,7 +9,7 @@ export const Molecule = styled.aside`
     background: var(--color-dark-30);
     border-radius: 25px;
     outline: 0;
-    color: var(--color-light-50);
+    color: var(--color-light);
     border: none;
     padding: 0.5rem 1rem;
     font-size: 1rem;

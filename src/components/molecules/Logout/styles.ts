@@ -10,9 +10,9 @@ export const Molecule = styled.div`
     color: var(--color-primary);
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0;
     text-transform: uppercase;
     outline: 0;
     cursor: pointer;

@@ -3,14 +3,14 @@ import { Molecule } from './styles';
 import { logout } from '../../../services/auth';
 
 import Img from '../../atoms/Img';
-import iconPower from '../../../assets/IconPower.svg';
+import iconPower from '../../../assets/iconPower.png';
 import Button from '../../atoms/Button';
 
 function Logout() {
   return (
     <Molecule>
       <Button onClick={() => logout()}>
-        Sair <Img src={iconPower} alt="Logout" />
+        <Img src={iconPower} alt="Logout" /> Sair
       </Button>
     </Molecule>
   );

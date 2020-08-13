@@ -7,7 +7,7 @@ export const Molecule = styled.aside`
   justify-content: space-between;
   width: 100%;
   
-  select, input[type='date'] {
+  select, input {
     width: 160px;
     background: var(--color-dark-30);
     border-radius: 5px;
@@ -16,6 +16,5 @@ export const Molecule = styled.aside`
     border: none;
     padding: 0.5rem 1rem;
     font-size: 1rem;
-    cursor: pointer;
   }
 `;
