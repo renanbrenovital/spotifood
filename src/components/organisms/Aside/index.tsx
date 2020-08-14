@@ -10,12 +10,16 @@ function Aside() {
   const [name, setName] = useState('');
 
   useEffect(() => {
-    const getCustomer = async () => {
-      const { data } = await apiSpotify.get('/me');
-      setName(data.display_name);
+    try {
+      const getCustomer = async () => {
+        const { data } = await apiSpotify.get('/me');
+        setName(data.display_name);
+      }
+  
+      getCustomer();      
+    } catch (error) {
+      throw new Error(error);
     }
-
-    getCustomer();
   }, []);
 
   return (

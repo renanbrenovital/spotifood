@@ -5,14 +5,17 @@ import Header from '../../organisms/Header';
 import Main from '../../organisms/Main';
 
 import { Page } from './styles';
+import FilterProvider from '../../../context/FilterContext';
 
 function Home() {
   return (
-    <Page>
-      <Aside />
-      <Header />
-      <Main />
-    </Page>
+    <FilterProvider>
+      <Page>
+        <Aside />
+        <Header />
+        <Main />
+      </Page>
+    </FilterProvider>
   );
 }
 

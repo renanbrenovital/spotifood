@@ -4,16 +4,17 @@ interface Option {
   name: string;
 }
 interface Props {
-  selected: Option;
+  name: string;
+  value: string;
   options: Option[];
   onChange: Function;
 }
 
 function Select(props: Props) {
-  const { selected, options, onChange } = props;
+  const { name, value, options, onChange } = props;
   return (
-    <select onChange={event => onChange(event.target.value)}>
-      <option value={selected.value}>{selected.name}</option>
+    <select name={name} value={value} onChange={event => onChange(event.target.value)}>
+      <option value="">{name}</option>
       {
         options.map(item => (
           <option value={item.value} key={item.value}>{item.name}</option>))

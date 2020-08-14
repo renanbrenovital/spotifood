@@ -1,26 +1,20 @@
-import React, { useState } from 'react';
-import { Molecule } from './styles';
-import _ from 'lodash';
+import React from 'react';
+import { useQuery } from '../../../context/FilterContext';
 
+import { Molecule } from './styles';
 import Input from '../../atoms/Input';
 
 function Search() {
-  const [value, setValue] = useState('');
-
-  const search = (q: string) => {
-    console.log(`Querying for ${q}`)
-  }
-
-  const delayedQuery = _.debounce((q: string) => search(q), 1000);
-
-  const onChange = (value: string) => {
-    setValue(value);
-    delayedQuery(value);
-  }
-
+  const { query, setQuery } = useQuery();
   return (
     <Molecule>
-      <Input value={value} type="text" name="search" placeholder="Search playlists by name" onChange={(value: string) => onChange(value)} />
+      <Input
+        value={query}
+        type="text"
+        name="search"
+        placeholder="Search playlists by name"
+        onChange={(value: string) => setQuery(value)} 
+      />
     </Molecule>
   );
 }
