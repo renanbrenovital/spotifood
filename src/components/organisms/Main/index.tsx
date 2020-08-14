@@ -35,7 +35,7 @@ function Main() {
   
   const params = (filters.length > 0) ? `?${filters.join('&')}` : '';
 
-  const random = new Date();
+  const random = new Date().toString();
   const every30seconds = useDebounceState(random, 30000);
   const delayedQuery = useDebounceState(query, 500);
   const delayedParams = useDebounceState(params, 1000);

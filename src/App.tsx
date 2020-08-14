@@ -1,11 +1,21 @@
 import React from 'react';
 import { isAuthenticated } from './services/auth';
 
-import SignIn from './components/pages/SignIn';
-import Home from './components/pages/Home';
+import SignIn from './pages/SignIn';
+import Home from './pages/Home';
+
+import GlobalStyle from './styles/global';
 
 function App() {
-    return isAuthenticated() ? <Home /> : <SignIn />;
+    return (
+			<>
+				<GlobalStyle />
+					{
+						isAuthenticated() ? <Home /> : <SignIn />
+					}
+			</>
+    )
+    
 }
 
 export default App;
