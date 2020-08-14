@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Aside from '../../organisms/Aside';
-import Header from '../../organisms/Header';
-import Main from '../../organisms/Main';
+import Aside from '../../components/organisms/Aside';
+import Header from '../../components/organisms/Header';
+import Main from '../../components/organisms/Main';
 
 import { Page } from './styles';
-import FilterProvider from '../../../context/FilterContext';
+import FilterProvider from '../../context/FilterContext';
 
 function Home() {
   return (

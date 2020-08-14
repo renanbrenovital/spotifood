@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { accountsSpotify } from '../../../services/api';
+import { accountsSpotify } from '../../services/api';
 
-import Login from '../../molecules/Login';
+import Login from '../../components/molecules/Login';
 import { Page } from './styles';
 
 function SignIn() {
