@@ -8,15 +8,18 @@ import {
   SCOPE
 } from '../utils/config';
 
+interface User {
+  display_name: string;
+}
 interface IAuthContext {
-  user: object;
+  user: User;
   signIn(): void;
   signOut(): void;
 }
 
 interface IAuthState {
   token: object;
-  user: object;
+  user: User;
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);

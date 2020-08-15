@@ -29,8 +29,14 @@ export const Page = styled.div`
       flex-direction: row;
 
       > img {
-        height: 15vh;
+        height: 10vh;
       }
+    }
+
+    main {
+     li {
+       width: 40%;
+     }
     }
 
   }
