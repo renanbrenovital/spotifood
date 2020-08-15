@@ -2,17 +2,17 @@ import React from 'react';
 import { Molecule } from './styles';
 
 import Logo from '../Logo';
-import Link from '../../atoms/Link';
+import Button from '../../atoms/Button';
 interface Props {
-  href: string;
+  onClick(): void;
 }
 
 function Login(props: Props) {
-  const { href } = props;
+  const { onClick } = props;
   return (
     <Molecule>
       <Logo />
-      <Link href={href}>ENTRAR</Link>
+      <Button onClick={onClick}>ENTRAR</Button>
     </Molecule>
   );
 }

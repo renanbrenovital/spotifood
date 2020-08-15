@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useFilter, useQuery } from '../../../context/FilterContext';
 import useDebounceState from '../../../hooks/useDebounceState';
 
-import { apiSpotify } from '../../../services/api';
+import { spotifyApi } from '../../../services/api';
 
 import { Organism } from './styles';
 import Playlists from '../../molecules/Playlists';
@@ -37,15 +37,15 @@ function Main() {
 
   const random = new Date().toString();
   const every30seconds = useDebounceState(random, 30000);
-  const delayedQuery = useDebounceState(query, 500);
+  const delayedQuery = useDebounceState(query, 200);
   const delayedParams = useDebounceState(params, 1000);
   
   useEffect(() => {
     const getData = async () => {
       try {     
         const response = delayedQuery ?
-          await apiSpotify.get(`/search?q=name:${delayedQuery}&type=playlist`) :
-          await apiSpotify.get(`/browse/featured-playlists${delayedParams}`);
+          await spotifyApi.get(`/search?q=name:${delayedQuery}&type=playlist`) :
+          await spotifyApi.get(`/browse/featured-playlists${delayedParams}`);
         
         const { data: { playlists } } = response;
         

@@ -11,15 +11,27 @@ export const Page = styled.div`
     "ASIDE HEAD"
     "ASIDE MAIN";
 
-  aside {
-    grid-area: ASIDE;
-  }
+  aside { grid-area: ASIDE; }
 
-  header {
-    grid-area: HEAD;
-  }
+  header { grid-area: HEAD; }
 
-  main {
-    grid-area: MAIN;
+  main { grid-area: MAIN; }
+
+  @media only screen and (max-width: 600px) {
+    grid-template-areas: 
+    "ASIDE"
+    "HEAD"
+    "MAIN";
+    
+    grid-template-columns: auto;
+
+    aside {
+      flex-direction: row;
+
+      > img {
+        height: 15vh;
+      }
+    }
+
   }
 `;

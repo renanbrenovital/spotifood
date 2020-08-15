@@ -9,8 +9,6 @@ function useDebounceState (value: string, timeout: number) {
         return () => clearTimeout(handler);
     }, [value, timeout]);
 
-    console.log(state);
-
     return state;
 }
 

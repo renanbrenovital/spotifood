@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from 'react';
-
 interface IContext {
   locale: string;
   setLocale: Function;
@@ -17,13 +16,7 @@ interface IContext {
 
 const FilterContext = createContext<IContext>({} as IContext);
 
-interface Props {
-  children: any;
-}
-
-export default function FilterProvider(props: Props) {
-  const { children } = props;
-
+export default function FilterProvider({ children }: any) {
   const [locale, setLocale] = useState('');
   const [country, setCountry] = useState('');
   const [timestamp, setTimestamp] = useState('');

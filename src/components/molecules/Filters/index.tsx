@@ -29,68 +29,88 @@ function Filters() {
     offset, setOffset
   } = useFilter();
   
-  const [selectLocale, setSelectLocale] = useState<ISelect>({id: '', name: '', values: []});
-  const [selectCountry, setSelectCountry] = useState<ISelect>({id: '', name: '', values: []});
-  const [inputTimestamp, setInputTimestamp] = useState<IInput>({id: '', name: '', validation: {}});
-  const [inputLimit, setInputLimit] = useState<IInput>({id: '', name: '', validation: {}});
-  const [inputOffset, setInputOffset] = useState<IInput>({id: '', name: '', validation: {}});
+  const [data, setData] = useState(() => {
+    const filters = localStorage.getItem('@Spotifood:filters');
+
+    if(filters) {
+      return JSON.parse(filters);
+    }
+    
+    return [];
+  });
   
   useEffect(() => {
-
-    async function getOptions() {
-      try {        
-        if(!localStorage.filters) {
-          const { data } = await apiMocky.get('/5a25fade2e0000213aa90776');
-          localStorage.filters = JSON.stringify(data.filters);
-        }
-        const filters = JSON.parse(localStorage.filters);
-        setSelectLocale(filters[0]);
-        setSelectCountry(filters[1]);
-        setInputTimestamp(filters[2]);
-        setInputLimit(filters[3]);
-        setInputOffset(filters[4]);
-      } catch (error) {
-        console.error(error);
-      }
+    const getOptions = async () => {        
+      const response = await apiMocky.get('/5a25fade2e0000213aa90776');
+      const { data: { filters } } = response;
+      
+      if(filters) {
+        localStorage.setItem('@Spotifood:filters', JSON.stringify(filters));
+        setData(filters);
+      }      
     }
 
-    getOptions();
-  }, []);
+    if(data.length === 0)
+      getOptions();
+
+  }, [data]); 
+  
+  const validateLimitValue = (number: string, data: any) => {
+    const { validation } = data;
+
+    if(Math.sign(Number(number)) !== 1) return;
+    if(number < validation.min || number > validation.max) return;
+
+    return true;
+  }
+
+  const validateOffsetValue = (number: string) => {
+    if(Math.sign(Number(number)) !== 1) return;
+
+    return true;
+  }
 
   return (
     <Molecule>
       <Select
-        name={selectCountry.name}
-        value={country}
-        options={selectCountry.values}
-        onChange={(value: string) => setCountry(value)}
+        name={data[0].name}
+        value={locale}
+        options={data[0].values}
+        onChange={(value: string) => setLocale(value)}
       />
       <Select
-        name={selectLocale.name}
-        value={locale}
-        options={selectLocale.values}
-        onChange={(value: string) => setLocale(value)}
+        name={data[1].name}
+        value={country}
+        options={data[1].values}
+        onChange={(value: string) => setCountry(value)}
       />
       <Input
         type="date"
-        name={inputTimestamp.id}
-        placeholder={inputTimestamp.name}
+        name={data[2].id}
+        placeholder={data[2].name}
         value={timestamp}
         onChange={(value: string) => setTimestamp(value)}
       />
       <Input
         type="number"
-        name={inputLimit.id}
-        placeholder={inputLimit.name}
+        name={data[3].id}
+        placeholder={data[3].name}
         value={limit}
-        onChange={(value: string) => setLimit(value)} 
+        onChange={(value: string) => {
+          if(validateLimitValue(value, data[3]))
+            setLimit(value);
+          }
+        } 
       />
       <Input
         type="number"
-        name={inputOffset.id}
-        placeholder={inputOffset.name}
+        name={data[4].id}
+        placeholder={data[4].name}
         value={offset}
-        onChange={(value: string) => setOffset(value)}
+        onChange={(value: string) => {
+          if(validateOffsetValue(value))
+            setOffset(value);
+        }}
       />
     </Molecule>
   );

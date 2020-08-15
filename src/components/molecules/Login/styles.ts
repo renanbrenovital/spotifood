@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Molecule = styled.div`
-  a {
+  button {
     background: var(--color-primary);
     border: 2px solid var(--color-dark-30);
     border-radius: 5px;

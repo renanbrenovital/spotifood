@@ -1,27 +1,37 @@
-import axios from 'axios';
-import { token } from './auth';
+import { 
+  MOCKY_URL_API,
+  SPOTIFY_URL_ACCOUNTS,
+  SPOTIFY_URL_API,
+  CLIENT_ID,
+  CLIENT_SECRET
+} from '../utils/config';
 
-const accountsSpotify = axios.create({
-  baseURL: 'https://accounts.spotify.com/api/',
-  headers: { 
-    "Content-Type": "application/x-www-form-urlencoded",
-    "Authorization": "Basic MWY1Y2YyY2M1NmRjNDBhYmI0ZGMxYWIzYWMzYzc5N2Q6ZDhjZjFmN2Q2ZmRhNDJmODgzY2VlYzIyMTM3YWFjYTU="
+import axios from 'axios';
+
+const token = localStorage.getItem('@Spotifood:token') || '';
+const { access_token } = token ? JSON.parse(token) : { access_token:'' };
+
+const spotifyApi = axios.create({
+  baseURL: SPOTIFY_URL_API,
+  headers: {
+    "Authorization": `Bearer ${access_token}`
   }
 });
 
-const apiSpotify = axios.create({
-  baseURL: "https://api.spotify.com/v1/",
-  headers: {
-    "Authorization": `Bearer ${token}`
+const spotifyAccounts = axios.create({
+  baseURL: SPOTIFY_URL_ACCOUNTS,
+  headers: { 
+    "Content-Type": "application/x-www-form-urlencoded",
+    'Authorization': 'Basic ' + (new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64'))
   }
 });
 
 const apiMocky = axios.create({
-  baseURL: "http://www.mocky.io/v2/",
+  baseURL: MOCKY_URL_API,
 });
 
 export {
-  accountsSpotify,
-  apiSpotify,
+  spotifyAccounts,
+  spotifyApi,
   apiMocky
 };
