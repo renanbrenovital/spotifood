@@ -14,9 +14,9 @@ function Select(props: Props) {
   const { name, value, options, onChange } = props;
   return (
     <select name={name} value={value} onChange={event => onChange(event.target.value)}>
-      <option value="">{name}</option>
+      <option value="" selected>{name}</option>
       {
-        options.map(item => (
+        options?.map(item => (
           <option value={item.value} key={item.value}>{item.name}</option>))
       }
     </select>

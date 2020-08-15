@@ -1,14 +1,30 @@
 import React, { createContext, useContext, useState } from 'react';
+interface IOption {
+  value: string;
+  name: string;
+}
+interface ISelect { 
+  id: string;
+  name: string;
+  value: string;
+  values: IOption[];
+}
+interface IInput {
+  id: string;
+  name: string;
+  value: string;
+  validation: object;
+}
 interface IContext {
-  locale: string;
+  locale: ISelect;
   setLocale: Function;
-  country: string;
+  country: ISelect;
   setCountry: Function;
-  timestamp: string;
+  timestamp: IInput;
   setTimestamp: Function;
-  limit: string;
+  limit: IInput;
   setLimit: Function;
-  offset: string;
+  offset: IInput;
   setOffset: Function;
   query: string;
   setQuery: Function;
@@ -16,13 +32,16 @@ interface IContext {
 
 const FilterContext = createContext<IContext>({} as IContext);
 
-export default function FilterProvider({ children }: any) {
-  const [locale, setLocale] = useState('');
-  const [country, setCountry] = useState('');
-  const [timestamp, setTimestamp] = useState('');
-  const [limit, setLimit] = useState('');
-  const [offset, setOffset] = useState('');
-  const [query, setQuery] = useState('');
+export default function FilterProvider({ children }: any) { 
+  
+  const [locale, setLocale] = useState<ISelect>({} as ISelect);
+  const [country, setCountry] = useState<ISelect>({} as ISelect);
+  
+  const [timestamp, setTimestamp] = useState<IInput>({} as IInput);
+  const [limit, setLimit] = useState<IInput>({} as IInput);
+  const [offset, setOffset] = useState<IInput>({} as IInput);
+  
+  const [query, setQuery] = useState<string>('');
   
   return (
     <FilterContext.Provider value={{

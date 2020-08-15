@@ -1,24 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useFilter } from '../../../context/FilterContext';
 import { apiMocky } from '../../../services/api';
 
 import { Molecule } from './styles';
 import Select from '../../atoms/Select';
 import Input from '../../atoms/Input';
-interface IOption {
-  value: string;
-  name: string;
-}
-interface ISelect {
-  id: string;
-  name: string;
-  values: IOption[];
-}
-interface IInput {
-  id: string;
-  name: string;
-  validation: Object;
-}
 
 function Filters() {  
   const {
@@ -29,87 +15,84 @@ function Filters() {
     offset, setOffset
   } = useFilter();
   
-  const [data, setData] = useState(() => {
-    const filters = localStorage.getItem('@Spotifood:filters');
-
-    if(filters) {
-      return JSON.parse(filters);
-    }
-    
-    return [];
-  });
-  
-  useEffect(() => {
-    const getOptions = async () => {        
-      const response = await apiMocky.get('/5a25fade2e0000213aa90776');
-      const { data: { filters } } = response;
-      
-      if(filters) {
-        localStorage.setItem('@Spotifood:filters', JSON.stringify(filters));
-        setData(filters);
-      }      
-    }
-
-    if(data.length === 0)
-      getOptions();
-
-  }, [data]); 
-  
-  const validateLimitValue = (number: string, data: any) => {
-    const { validation } = data;
-
+  const limitIsValid = (number: string, validation: any) => {
     if(Math.sign(Number(number)) !== 1) return;
+    
     if(number < validation.min || number > validation.max) return;
 
     return true;
   }
 
-  const validateOffsetValue = (number: string) => {
+  const offsetIsValid = (number: string, validation: any) => {
     if(Math.sign(Number(number)) !== 1) return;
 
     return true;
   }
+  
+  
+  useEffect(() => {
+    const apiFilters = async () => {      
+      if(!localStorage.getItem('@Spotifood:filters')) {
+        const { data } = await apiMocky.get("/5a25fade2e0000213aa90776");    
+        const { filters } = data;
+        localStorage.setItem('@Spotifood:filters', JSON.stringify(filters));
+      }   
+      
+      const localFilters = localStorage.getItem('@Spotifood:filters') || '';
+
+      if(localFilters) {
+        const filters = JSON.parse(localFilters);
+        setLocale(filters[0]);
+        setCountry(filters[1]);
+        setTimestamp(filters[2]);
+        setLimit(filters[3]);
+        setOffset(filters[4]);  
+      }   
+    }
+
+    apiFilters();
+  }, [setCountry, setLimit, setLocale, setOffset, setTimestamp]);
 
   return (
     <Molecule>
       <Select
-        name={data[0].name}
-        value={locale}
-        options={data[0].values}
-        onChange={(value: string) => setLocale(value)}
+        name={country.id}
+        value={country.value}
+        options={country.values}
+        onChange={(value: string) => setCountry({...country, value})}
       />
       <Select
-        name={data[1].name}
-        value={country}
-        options={data[1].values}
-        onChange={(value: string) => setCountry(value)}
+        name={locale.id}
+        value={locale.value}
+        options={locale.values}
+        onChange={(value: string) => setLocale({...locale, value})}
       />
       <Input
         type="date"
-        name={data[2].id}
-        placeholder={data[2].name}
-        value={timestamp}
-        onChange={(value: string) => setTimestamp(value)}
+        name={timestamp.id}
+        placeholder={timestamp.name}
+        value={timestamp.value}
+        onChange={(value: string) => setTimestamp({...timestamp, value})}
       />
       <Input
         type="number"
-        name={data[3].id}
-        placeholder={data[3].name}
-        value={limit}
+        name={limit.id}
+        placeholder={limit.name}
+        value={limit.value}
         onChange={(value: string) => {
-          if(validateLimitValue(value, data[3]))
-            setLimit(value);
+          if(limitIsValid(value, limit.validation)) {
+            setLimit({...limit, value});
           }
-        } 
+        }} 
       />
       <Input
         type="number"
-        name={data[4].id}
-        placeholder={data[4].name}
-        value={offset}
+        name={offset.id}
+        placeholder={offset.name}
+        value={offset.value}
         onChange={(value: string) => {
-          if(validateOffsetValue(value))
-            setOffset(value);
+          if(offsetIsValid(value, offset.validation))
+            setOffset({...offset, value});
         }}
       />
     </Molecule>

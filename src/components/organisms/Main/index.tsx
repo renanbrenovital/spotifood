@@ -13,22 +13,22 @@ function Main() {
   const { locale, country, timestamp, limit, offset } = useFilter();  
   const { query } = useQuery();
   
-  const filters = [];  
+  const filters: Array<string> = [];
   
-  if(locale)
-    filters.push(`locale=${locale}`);
+  if(locale.value)
+    filters.push(`locale=${locale.value}`);
   
-  if(country)
-    filters.push(`country=${country}`);
+  if(country.value)
+    filters.push(`country=${country.value}`);
   
-  if(limit)
-    filters.push(`limit=${limit}`);
+  if(limit.value)
+    filters.push(`limit=${limit.value}`);
   
-  if(offset)
-    filters.push(`offset=${offset}`);
+  if(offset.value)
+    filters.push(`offset=${offset.value}`);
   
-  if(timestamp) {
-    const dateISO = new Date(timestamp).toISOString();
+  if(timestamp.value) {
+    const dateISO = new Date(timestamp.value).toISOString();
     const timestampISO = dateISO.substr(0,19);
     filters.push(`timestamp=${timestampISO}`);
   }
@@ -41,18 +41,14 @@ function Main() {
   const delayedParams = useDebounceState(params, 1000);
   
   useEffect(() => {
-    const getData = async () => {
-      try {     
-        const response = delayedQuery ?
-          await spotifyApi.get(`/search?q=name:${delayedQuery}&type=playlist`) :
-          await spotifyApi.get(`/browse/featured-playlists${delayedParams}`);
-        
-        const { data: { playlists } } = response;
-        
-        setPlaylistsItems(playlists.items);
-      } catch (error) {
-        throw new Error(error);
-      }
+    const getData = async () => {          
+      const response = delayedQuery ?
+        await spotifyApi.get(`/search?q=name:${delayedQuery}&type=playlist`) :
+        await spotifyApi.get(`/browse/featured-playlists${delayedParams}`);
+      
+      const { data: { playlists } } = response;
+      
+      setPlaylistsItems(playlists.items);
     }  
     
     getData();
